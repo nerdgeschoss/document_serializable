@@ -37,6 +37,8 @@ class Address
 end
 
 class Invoice < ApplicationRecord
+  include DocumentSerializable	
+
   attribute address, Address
   attribute subject
 end
