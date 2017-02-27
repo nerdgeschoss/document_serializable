@@ -39,7 +39,7 @@ module DocumentSerializable
       end
     end
 
-    def property(name, type = String, options = {})
+    def attribute(name, type = String, options = {})
       property_class.send :attribute, name, type, options
       delegate name, to: :property_object
       delegate "#{name}=".to_sym, to: :property_object

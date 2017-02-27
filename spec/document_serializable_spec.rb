@@ -7,8 +7,8 @@ describe DocumentSerializable do
 
     include DocumentSerializable
 
-    property :slug
-    property :id, Integer
+    attribute :slug
+    attribute :id, Integer
 
     attr_accessor :properties
 
@@ -32,7 +32,7 @@ describe DocumentSerializable do
 
       include DocumentSerializable
 
-      property :name
+      attribute :name
 
       attr_accessor :properties
 
@@ -52,7 +52,7 @@ describe DocumentSerializable do
 
   it "does inherit properties from it's parent" do
     class Subclass < TestClass
-      property :name
+      attribute :name
     end
 
     test = Subclass.new slug: "test-slug", id: "5", name: "Testname"
