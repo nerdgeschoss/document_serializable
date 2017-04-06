@@ -1,7 +1,7 @@
 require "bundler/setup"
+require "active_record"
 require "document_serializable"
 require "pry"
-
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

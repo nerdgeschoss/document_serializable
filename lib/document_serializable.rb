@@ -1,6 +1,7 @@
 require "document_serializable/version"
 require "active_support"
 require "active_support/core_ext"
+require "hashdiff"
 require "virtus"
 
 module DocumentSerializable
@@ -43,6 +44,18 @@ module DocumentSerializable
       property_class.send :attribute, name, type, options
       delegate name, to: :property_object
       delegate "#{name}=".to_sym, to: :property_object
+    end
+  end
+
+  def previous_changes
+    if defined?(super)
+      super.each_with_object({}) do |(key, value), result|
+        if value.last.is_a?(Hash)
+          HashDiff.diff(value.first || {}, value.last).each { |diff| result[diff[1]] = diff[2..3] }
+        else
+          result[key] = value
+        end
+      end
     end
   end
 end
